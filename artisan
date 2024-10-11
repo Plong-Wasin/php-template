@@ -1,0 +1,20 @@
+<?php
+
+require_once __DIR__ . '/app/bootstrap.php';
+
+use App\Console\Commands\MakeCommand;
+use App\Console\Commands\MakeMigrationCommand;
+use App\Console\Commands\MigrateCommand;
+use Symfony\Component\Console\Application;
+
+if (php_sapi_name() === 'cli') {
+    $application = new Application();
+
+    // Register your command class
+    $application->add(new MakeMigrationCommand());
+    $application->add(new MakeCommand());
+    $application->add(new MigrateCommand());
+
+    // Handle the incoming console command
+    $application->run();
+}
